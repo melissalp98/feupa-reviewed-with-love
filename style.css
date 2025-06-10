@@ -78,3 +78,13 @@ button {
   0% { transform: translateY(0) rotate(0deg); }
   100% { transform: translateY(100vh) rotate(360deg); }
 }
+.product-info {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 2px dashed #e91e63; /* borda fofinha rosa */
+  border-radius: 16px;
+  background-color: #fffafd; /* leve rosadinho de fundo */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 500px;
+}
