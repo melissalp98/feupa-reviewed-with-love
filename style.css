@@ -1,0 +1,80 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+  color: #333;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #d6336c;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.comments, .product-info, .gallery {
+  margin: 2rem 0;
+}
+
+.comment-list p {
+  background: #fff;
+  border-left: 4px solid #d6336c;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+}
+
+input, textarea, button {
+  padding: 10px;
+  font-size: 1rem;
+}
+
+button {
+  background: #d6336c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.photos {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.photos img {
+  width: 150px;
+  border-radius: 10px;
+}
+
+/* Corações flutuantes */
+.floating-hearts::before {
+  content: "💖 💘 💞 💕 💓 💗";
+  font-size: 1.5rem;
+  animation: float 4s infinite linear;
+  position: fixed;
+  top: 0;
+  left: 50%;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
