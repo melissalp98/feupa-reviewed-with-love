@@ -88,11 +88,12 @@ button {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   max-width: 500px;
 }
-.photos img {
+.carrossel img {
   transition: transform 0.3s ease;
 }
 
-.photos img:hover {
+.carrossel img:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
+
