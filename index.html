@@ -2,50 +2,152 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Feliz Dia dos Namorados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feupa Reviewed With Love</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #e91e63;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    input, textarea, button {
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #e91e63;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover {
+      background-color: #d81b60;
+    }
+    .comentarios {
+      max-width: 600px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .comentario {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .coracoes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+    .coracao {
+      position: absolute;
+      font-size: 24px;
+      animation: subir 5s linear infinite;
+      color: #ff69b4;
+    }
+    @keyframes subir {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
-  <div class="floating-hearts"></div>
+  <h1>Feupa Reviewed With Love 💖</h1>
 
-  <header>
-    <h1>Feupa: Review com amor 💖</h1>
-    <p>Avaliado em milhões pelo coração da Mel.</p>
-  </header>
+  <form id="comentarioForm">
+    <input type="text" id="nome" placeholder="Seu nome" required />
+    <textarea id="mensagem" rows="3" placeholder="Deixe seu recado para o casal" required></textarea>
+    <button type="submit">Enviar Comentário</button>
+  </form>
 
-  <section class="product-info">
-    <h2>Características do Feupa:</h2>
-    <ul>
-      <li>💬 Atencioso 100/10</li>
-      <li>😂 Linguagem de amor: atos de palhaçadinha</li>
-      <li>☕ Faz café e chamego</li>
-    </ul>
-  </section>
+  <section class="comentarios" id="comentarios"></section>
 
-  <section class="comments">
-    <h2>Avaliações:</h2>
-    <div class="comment-list">
-      <p>⭐️⭐️⭐️⭐️⭐️ — "Feupa é um amor de pessoa! Mel, você arrasou."</p>
-      <p>⭐️⭐️⭐️⭐️⭐️ — "Leonino mais gente boa que eu já conheci."</p>
-      <p>⭐️⭐️⭐️⭐️⭐️ — "É o meu genrinho querido!"</p>
-    </div>
+  <div class="coracoes" id="coracoes"></div>
 
-    <form id="comment-form">
-      <input type="text" placeholder="Seu nome" required />
-      <textarea placeholder="Diga ao Feupa o quanto a Mel ama ele 💌" required></textarea>
-      <button type="submit">Enviar amor</button>
-    </form>
-  </section>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  <section class="gallery">
-    <h2>Galeria do Amor</h2>
-    <div class="photos">
-      <img src="assets/placeholder.jpg" alt="Foto 1">
-      <img src="assets/placeholder.jpg" alt="Foto 2">
-    </div>
-  </section>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDJi5lSP79-_tqMoPp64Nr82okJ1JtSSVM",
+      authDomain: "dia-dos-namorados-a40e4.firebaseapp.com",
+      projectId: "dia-dos-namorados-a40e4",
+      storageBucket: "dia-dos-namorados-a40e4.firebasestorage.app",
+      messagingSenderId: "673875812400",
+      appId: "1:673875812400:web:7c14ededb73ceb659a4df5"
+    };
 
-  <script src="script.js"></script>
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const comentarioForm = document.getElementById("comentarioForm");
+    const comentariosSection = document.getElementById("comentarios");
+
+    comentarioForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nome = document.getElementById("nome").value;
+      const mensagem = document.getElementById("mensagem").value;
+      if (nome && mensagem) {
+        await addDoc(collection(db, "comentarios"), {
+          nome,
+          mensagem,
+          data: new Date()
+        });
+        comentarioForm.reset();
+      }
+    });
+
+    const q = query(collection(db, "comentarios"), orderBy("data", "desc"));
+
+    onSnapshot(q, (snapshot) => {
+      comentariosSection.innerHTML = "";
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const div = document.createElement("div");
+        div.className = "comentario";
+        div.innerHTML = `<p>💬 “${data.mensagem}”</p><span>— ${data.nome}</span>`;
+        comentariosSection.appendChild(div);
+      });
+    });
+
+    // animação de corações flutuantes
+    const coracoes = document.getElementById("coracoes");
+    setInterval(() => {
+      const cor = document.createElement("div");
+      cor.className = "coracao";
+      cor.innerText = "💗";
+      cor.style.left = Math.random() * 100 + "%";
+      cor.style.fontSize = 16 + Math.random() * 20 + "px";
+      coracoes.appendChild(cor);
+      setTimeout(() => cor.remove(), 5000);
+    }, 500);
+  </script>
 </body>
 </html>
