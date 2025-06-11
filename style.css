@@ -160,3 +160,26 @@ button:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
+
+.infos-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+.infos-wrapper .product-info,
+.infos-wrapper .comments {
+  flex: 1 1 300px;
+  max-width: 450px;
+}
+
+.infos-wrapper .comments {
+  background-color: #fffafd;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 2px dashed #f06292;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
