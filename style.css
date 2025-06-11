@@ -162,10 +162,3 @@ button:hover {
   max-width: 450px;
 }
 
-.infos-wrapper .comments {
-  background-color: #fffafd;
-  padding: 1.5rem;
-  border-radius: 16px;
-  border: 2px dashed #f06292;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
