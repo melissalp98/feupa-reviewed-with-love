@@ -168,4 +168,23 @@ button:hover {
   font-family: 'Poppins', sans-serif;
 }
 
+.creditos {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #6e004e;
+  background-color: #fff0f5;
+  border-top: 1px dashed #d6336c;
+  margin-top: 4rem;
+}
+
+.creditos a {
+  color: #d6336c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.creditos a:hover {
+  text-decoration: underline;
+}
 
