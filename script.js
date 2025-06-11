@@ -1,62 +1,29 @@
+const comentarioForm = document.getElementById("comentarioForm");
 const comentariosSection = document.getElementById("comment-list");
-const form = document.getElementById("comentarioForm");
 
-form.addEventListener("submit", (e) => {
+comentarioForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  
-  const name = document.getElementById("nome").value.trim();
-  const message = document.getElementById("mensagem").value.trim();
-  
-  if (!name || !message) return; // nada de comentário vazio, né?
-
-  const newComment = document.createElement("p");
-  newComment.textContent = `⭐️⭐️⭐️⭐️⭐️ — "${message}" — ${name}`;
-  
-  comentariosSection.appendChild(newComment);
-  
-  soltarConfetti();
-  
-  form.reset();
+  const nome = document.getElementById("nome").value;
+  const mensagem = document.getElementById("mensagem").value;
+  if (nome && mensagem) {
+    await addDoc(collection(db, "comentarios"), {
+      nome,
+      mensagem,
+      data: new Date()
+    });
+    comentarioForm.reset();
+  }
 });
 
-function soltarConfetti() {
-  const duration = 3000;
-  const animationEnd = Date.now() + duration;
-  const colors = ['#e91e63', '#ff4081', '#f8bbd0', '#c2185b'];
+const q = query(collection(db, "comentarios"), orderBy("data", "desc"));
 
-  (function frame() {
-    const timeLeft = animationEnd - Date.now();
-    if (timeLeft <= 0) return; // para o loop aqui
-
-    const confettiCount = 5;
-    for (let i = 0; i < confettiCount; i++) {
-      const confetti = document.createElement('div');
-      confetti.style.position = 'fixed';
-      confetti.style.width = '10px';
-      confetti.style.height = '10px';
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      confetti.style.left = Math.random() * window.innerWidth + 'px';
-      confetti.style.top = '0px';
-      confetti.style.opacity = '1';
-      confetti.style.borderRadius = '50%';
-      confetti.style.zIndex = '9999';
-      confetti.style.pointerEvents = 'none';
-      document.body.appendChild(confetti);
-
-      let top = 0;
-      const fallSpeed = Math.random() * 3 + 2;
-
-      const fall = setInterval(() => {
-        top += fallSpeed;
-        confetti.style.top = top + 'px';
-        confetti.style.opacity = 1 - top / window.innerHeight;
-        if (top > window.innerHeight) {
-          clearInterval(fall);
-          confetti.remove();
-        }
-      }, 16);
-    }
-    requestAnimationFrame(frame);
-  })();
-}
-
+onSnapshot(q, (snapshot) => {
+  comentariosSection.innerHTML = "";
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    const div = document.createElement("div");
+    div.className = "comentario";
+    div.innerHTML = `<p>💬 “${data.mensagem}”</p><span>— ${data.nome}</span>`;
+    comentariosSection.appendChild(div);
+  });
+});
