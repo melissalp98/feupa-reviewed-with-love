@@ -1,3 +1,7 @@
+/* ===== BASE HERDADA DE MEL + UPGRADES DO IRMÃO ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@300;400;500;600&display=swap');
+
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -25,12 +29,30 @@ ul {
   margin: 2rem 0;
 }
 
-.comment-list p {
-  background: #ffffff;
-  border-left: 4px solid #d6336c;
+.comment-list div {
+  background: #fff0f5;
+  border: 2px solid #d6336c;
   padding: 1rem;
   margin-bottom: 1rem;
-  border-radius: 5px;
+  border-radius: 8px;
+  animation: aparecer 0.5s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment-list p {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  color: #6e004e;
+  text-align: center;
+  margin: 0;
+}
+
+.comment-list span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  display: block;
+  text-align: right;
+  margin-top: 5px;
 }
 
 form {
@@ -38,19 +60,32 @@ form {
   flex-direction: column;
   gap: 10px;
   max-width: 500px;
+  margin: 0 auto;
 }
 
-input, textarea, button {
-  padding: 10px;
+input#nome, textarea#mensagem {
+  padding: 12px;
+  border: 2px solid #d6336c;
+  border-radius: 8px;
+  font-family: 'Dancing Script', cursive;
   font-size: 1rem;
+  background-color: #fff0f5;
 }
 
 button {
   background: #d6336c;
   color: #fff;
   border: none;
-  cursor: pointer;
+  padding: 12px;
   border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .photos {
@@ -62,9 +97,30 @@ button {
 .photos img {
   width: 150px;
   border-radius: 10px;
+  transition: transform 0.3s ease;
 }
 
-/* Corações flutuantes */
+.photos img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.btn-esquerda, .btn-direita {
+  background: #fff;
+  border: 2px solid #d6336c;
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.btn-esquerda:hover, .btn-direita:hover {
+  transform: scale(1.1);
+  background-color: #fff0f5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
 .floating-hearts::before {
   content: "💖 💘 💞 💕 💓 💗";
   font-size: 1.5rem;
@@ -78,16 +134,23 @@ button {
   0% { transform: translateY(0) rotate(0deg); }
   100% { transform: translateY(100vh) rotate(360deg); }
 }
+
+@keyframes aparecer {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 .product-info {
   text-align: center;
   margin: 2rem auto;
   padding: 1.5rem;
-  border: 2px dashed #e91e63; /* borda fofinha rosa */
+  border: 2px dashed #e91e63;
   border-radius: 16px;
-  background-color: #fffafd; /* leve rosadinho de fundo */
+  background-color: #fffafd;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   max-width: 500px;
 }
+
 .carrossel-container img {
   transition: transform 0.3s ease;
 }
