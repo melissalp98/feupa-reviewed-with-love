@@ -243,6 +243,22 @@
   <source src="audio/valentine-day.mp3" type="audio/mpeg">
 </audio>
 
+<script>
+  window.addEventListener('load', () => {
+    const audio = document.getElementById('audio-romance');
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          console.log("🎵 Música tocando!");
+        })
+        .catch((error) => {
+          console.warn("Autoplay bloqueado 😢. O usuário precisa interagir com a página.", error);
+        });
+    }
+  });
+</script>
 
 </body>
 </html>
