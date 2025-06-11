@@ -1,15 +1,18 @@
+const comentariosSection = document.getElementById("comment-list");
 const form = document.getElementById("comentarioForm");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   
-  const name = document.getElementById("nome").value;
-  const message = document.getElementById("mensagem").value;
+  const name = document.getElementById("nome").value.trim();
+  const message = document.getElementById("mensagem").value.trim();
   
+  if (!name || !message) return; // nada de comentário vazio, né?
+
   const newComment = document.createElement("p");
   newComment.textContent = `⭐️⭐️⭐️⭐️⭐️ — "${message}" — ${name}`;
   
-  document.getElementById("comment-list").appendChild(newComment);
+  comentariosSection.appendChild(newComment);
   
   soltarConfetti();
   
@@ -17,13 +20,13 @@ form.addEventListener("submit", (e) => {
 });
 
 function soltarConfetti() {
-  const duration = 3 * 1000;
+  const duration = 3000;
   const animationEnd = Date.now() + duration;
   const colors = ['#e91e63', '#ff4081', '#f8bbd0', '#c2185b'];
 
   (function frame() {
     const timeLeft = animationEnd - Date.now();
-    if (timeLeft <= 0) return;
+    if (timeLeft <= 0) return; // para o loop aqui
 
     const confettiCount = 5;
     for (let i = 0; i < confettiCount; i++) {
@@ -56,3 +59,4 @@ function soltarConfetti() {
     requestAnimationFrame(frame);
   })();
 }
+
