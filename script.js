@@ -2,20 +2,19 @@ const form = document.getElementById("comentarioForm");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  
   const name = document.getElementById("nome").value;
   const message = document.getElementById("mensagem").value;
-
+  
   const newComment = document.createElement("p");
   newComment.textContent = `⭐️⭐️⭐️⭐️⭐️ — "${message}" — ${name}`;
-
-  document.getElementById("comentarios").appendChild(newComment);
-
-  // 💥 Efeito confetti ativado
+  
+  document.getElementById("comment-list").appendChild(newComment);
+  
   soltarConfetti();
-
+  
   form.reset();
 });
-
 
 function soltarConfetti() {
   const duration = 3 * 1000;
@@ -57,4 +56,3 @@ function soltarConfetti() {
     requestAnimationFrame(frame);
   })();
 }
-
