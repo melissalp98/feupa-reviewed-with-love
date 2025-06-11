@@ -140,16 +140,6 @@ button:hover {
   100% { opacity: 1; transform: translateY(0); }
 }
 
-.product-info {
-  text-align: center;
-  padding: 1.5rem;
-  border: 2px dashed #e91e63;
-  border-radius: 16px;
-  background-color: #fffafd;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  flex: 1 1 300px;
-  max-width: 450px;
-}
 
 
 .carrossel-container img {
