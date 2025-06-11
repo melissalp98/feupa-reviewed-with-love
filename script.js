@@ -6,7 +6,7 @@ comentarioForm.addEventListener("submit", async (e) => {
   const nome = document.getElementById("nome").value;
   const mensagem = document.getElementById("mensagem").value;
   if (nome && mensagem) {
-    await addDoc(collection(db, "comentarios"), {
+    await addDoc(collection(db, "comment-list"), {
       nome,
       mensagem,
       data: new Date()
@@ -15,14 +15,14 @@ comentarioForm.addEventListener("submit", async (e) => {
   }
 });
 
-const q = query(collection(db, "comentarios"), orderBy("data", "desc"));
+const q = query(collection(db, "comment-list"), orderBy("data", "desc"));
 
 onSnapshot(q, (snapshot) => {
   comentariosSection.innerHTML = "";
   snapshot.forEach((doc) => {
     const data = doc.data();
     const div = document.createElement("div");
-    div.className = "comentario";
+    div.className = "comment-list";
     div.innerHTML = `<p>💬 “${data.mensagem}”</p><span>— ${data.nome}</span>`;
     comentariosSection.appendChild(div);
   });
