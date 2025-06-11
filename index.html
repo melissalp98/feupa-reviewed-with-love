@@ -43,14 +43,14 @@
     button:hover {
       background-color: #d81b60;
     }
-    .comentarios {
+    .comment-list {
       max-width: 600px;
       margin: 2rem auto;
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
-    .comentario {
+    .comment-list {
       background: white;
       padding: 1rem;
       border-radius: 10px;
@@ -209,14 +209,14 @@
     const db = getFirestore(app);
 
     const comentarioForm = document.getElementById("comentarioForm");
-    const comentariosSection = document.getElementById("comentarios");
+    const comentariosSection = document.getElementById("comment-list");
 
     comentarioForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const nome = document.getElementById("nome").value;
       const mensagem = document.getElementById("mensagem").value;
       if (nome && mensagem) {
-        await addDoc(collection(db, "comentarios"), {
+        await addDoc(collection(db, "comment-list"), {
           nome,
           mensagem,
           data: new Date()
@@ -225,14 +225,14 @@
       }
     });
 
-    const q = query(collection(db, "comentarios"), orderBy("data", "desc"));
+    const q = query(collection(db, "comment-list"), orderBy("data", "desc"));
 
     onSnapshot(q, (snapshot) => {
       comentariosSection.innerHTML = "";
       snapshot.forEach((doc) => {
         const data = doc.data();
         const div = document.createElement("div");
-        div.className = "comentario";
+        div.className = "comment-list";
         div.innerHTML = `<p>💬 “${data.mensagem}”</p><span>— ${data.nome}</span>`;
         comentariosSection.appendChild(div);
       });
