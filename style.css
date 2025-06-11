@@ -29,31 +29,28 @@ ul {
   margin: 2rem 0;
 }
 
-.comment-list div {
-  background: #fff0f5;
-  border: 2px solid #d6336c;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  animation: aparecer 0.5s ease-in-out;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.comment-list p {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.2rem;
-  color: #6e004e;
-  text-align: center;
+.comment-list {
+  padding-left: 0;
   margin: 0;
 }
 
-.comment-list span {
+.comment-list p {
   font-family: 'Poppins', sans-serif;
-  font-size: 0.9rem;
-  display: block;
-  text-align: right;
-  margin-top: 5px;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.8rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+
+.comment-list p::before {
+  content: "⭐️⭐️⭐️⭐️⭐️";
+  font-size: 1.2rem;
+  display: inline-block;
+}
+
 
 form {
   display: flex;
