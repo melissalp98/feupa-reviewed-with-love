@@ -1,17 +1,22 @@
-const form = document.getElementById("comment-form");
+const form = document.getElementById("comentarioForm");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const name = form.querySelector("input").value;
-  const message = form.querySelector("textarea").value;
+  const name = document.getElementById("nome").value;
+  const message = document.getElementById("mensagem").value;
 
   const newComment = document.createElement("p");
   newComment.textContent = `⭐️⭐️⭐️⭐️⭐️ — "${message}" — ${name}`;
 
-  document.querySelector(".comment-list").appendChild(newComment);
+  document.getElementById("comentarios").appendChild(newComment);
+
+  // 💥 Efeito confetti ativado
+  soltarConfetti();
 
   form.reset();
 });
+
+
 function soltarConfetti() {
   const duration = 3 * 1000;
   const animationEnd = Date.now() + duration;
@@ -53,5 +58,3 @@ function soltarConfetti() {
   })();
 }
 
-// Exemplo de uso:
-// soltarConfetti();
