@@ -142,14 +142,15 @@ button:hover {
 
 .product-info {
   text-align: center;
-  margin: 2rem auto;
   padding: 1.5rem;
   border: 2px dashed #e91e63;
   border-radius: 16px;
   background-color: #fffafd;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  max-width: 500px;
+  flex: 1 1 300px;
+  max-width: 450px;
 }
+
 
 .carrossel-container img {
   transition: transform 0.3s ease;
