@@ -46,7 +46,6 @@ ul {
 }
 
 .comment-list p::before {
-  content: "⭐️⭐️⭐️⭐️⭐️";
   font-size: 1.2rem;
   display: inline-block;
 }
